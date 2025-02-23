@@ -17,7 +17,7 @@ module itemModule()
 	difference()
 	{
         // Exterior:
-		cylinder(d=containerOD, h=containerZ);
+        translate([0,0,containerZ]) mirror([0,0,1]) simpleChamferedCylinder(d=containerOD, h=containerZ, cz=2);
 
         // Base interior:
 		translate([0,0,baseFloorZ]) 
