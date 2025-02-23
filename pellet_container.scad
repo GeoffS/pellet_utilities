@@ -1,39 +1,37 @@
 include <../OpenSCAD_Lib/MakeInclude.scad>
 include <../OpenSCAD_Lib/chamferedCylinders.scad>
 
-canOD = 66;
-canZ = 23;
-canCZ = 20;
-canWallThickness = 2;
+funnelToBaseDia = 40;
 
-baseTopDia = 32;
+containerOD = 120;
+containerZ = 100;
+containerWallThickness = 2;
 
-canInteriorZ = canZ+canCZ-canWallThickness;
-canInteriorCZ = canCZ-canWallThickness;
-
-funnelZ = 45;
-
-baseFunnelJoinerZ = 6;
+baseFloorZ = 2;
+baseID = containerOD - 2*containerWallThickness;
+baseCylinderZ = 20;
 
 module itemModule()
 {
 	// Base:
 	difference()
 	{
-		hull()
-		{
-			cylinder(d=canOD+25, h=canZ);
-			topRingZ = 10;
-			tcy([0,0,canInteriorZ+funnelZ+canWallThickness-topRingZ], d=baseTopDia+2*funnelZ, h=topRingZ-2);
-		}
+        // Exterior:
+		cylinder(d=containerOD, h=containerZ);
 
-		translate([0,0,-1]) simpleChamferedCylinder(d=canOD, h=canInteriorZ+1, cz=canInteriorCZ);
+        // Base interior:
+		translate([0,0,baseFloorZ]) 
+        {
+            cylinder(d=baseID, h=baseCylinderZ+nothing);
+            translate([0,0,baseCylinderZ]) cylinder(d1=baseID, d2=0, h=baseID/2);
+        }
 
-		cylinder(d=baseTopDia, h=100);
+        // Funnel:
+        translate([0,0,containerZ-baseID/2]) cylinder(d1=0, d2=baseID, h=baseID/2);
+        tcy([0,0,containerZ-nothing], d=baseID, h=10);
 
-		translate([0,0,canInteriorZ]) translate([0,0,canWallThickness]) cylinder(d1=baseTopDia, d2=baseTopDia+2*funnelZ, h=funnelZ);
-
-		translate([0,0,-100+canOD/2+2]) cylinder(d1=200, d2=0, h=100);
+        // Opening between funnel and container:
+		tcy([0,0,10], d=funnelToBaseDia, h=100);
 	}
 }
 
