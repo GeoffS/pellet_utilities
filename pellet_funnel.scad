@@ -32,6 +32,8 @@ module itemModule()
 		cylinder(d=baseTopDia, h=100);
 
 		translate([0,0,canInteriorZ]) translate([0,0,canWallThickness]) cylinder(d1=baseTopDia, d2=baseTopDia+2*funnelZ, h=funnelZ);
+
+		translate([0,0,-100+canOD/2+2]) cylinder(d1=200, d2=0, h=100);
 	}
 }
 
