@@ -11,7 +11,7 @@ baseTopDia = 32;
 canInteriorZ = canZ+canCZ-canWallThickness;
 canInteriorCZ = canCZ-canWallThickness;
 
-funnelZ = 40;
+funnelZ = 45;
 
 baseFunnelJoinerZ = 6;
 
@@ -22,7 +22,7 @@ module itemModule()
 	{
 		hull()
 		{
-			cylinder(d=canOD+20, h=canZ);
+			cylinder(d=canOD+25, h=canZ);
 			topRingZ = 10;
 			tcy([0,0,canInteriorZ+funnelZ+canWallThickness-topRingZ], d=baseTopDia+2*funnelZ, h=topRingZ-2);
 		}
