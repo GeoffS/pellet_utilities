@@ -20,7 +20,7 @@ module itemModule()
 	// Base:
 	difference()
 	{
-		union()
+		hull()
 		{
 			simpleChamferedCylinder(d=canOD+2*canWallThickness, h=canZ+canCZ, cz=canCZ);
 			translate([0,0,canInteriorZ]) cylinder(d1=baseTopDia, d2=baseTopDia+2*funnelZ, h=funnelZ);
