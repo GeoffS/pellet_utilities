@@ -22,16 +22,10 @@ module itemModule()
 	{
 		hull()
 		{
-			// #simpleChamferedCylinder(d=canOD+2*canWallThickness, h=canZ+canCZ, cz=canCZ);
 			cylinder(d=canOD+20, h=canZ);
 			topRingZ = 10;
 			tcy([0,0,canInteriorZ+funnelZ+canWallThickness-topRingZ], d=baseTopDia+2*funnelZ, h=topRingZ-2);
-			// translate([0,0,canInteriorZ]) cylinder(d1=baseTopDia, d2=baseTopDia+2*funnelZ, h=funnelZ);
-			// translate([0,0,canInteriorZ+canWallThickness/2-baseFunnelJoinerZ/2]) cylinder(d=baseTopDia+8, h=baseFunnelJoinerZ);
-			// tcy([0,0,canInteriorZ+funnelZ], d=baseTopDia+2*funnelZ, h=canWallThickness);
 		}
-
-		// tcy([0,0,canInteriorZ+funnelZ+canWallThickness-2], d=200, h=20);
 
 		translate([0,0,-1]) simpleChamferedCylinder(d=canOD, h=canInteriorZ+1, cz=canInteriorCZ);
 
