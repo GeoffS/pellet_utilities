@@ -22,7 +22,7 @@ module itemModule()
         // Base interior:
 		translate([0,0,baseFloorZ]) 
         {
-            cylinder(d=baseID, h=baseCylinderZ+nothing);
+            translate([0,0,baseCylinderZ+nothing]) mirror([0,0,1]) simpleChamferedCylinder(d=baseID, h=baseCylinderZ+nothing, cz=1);
             translate([0,0,baseCylinderZ]) cylinder(d1=baseID, d2=0, h=baseID/2);
         }
 
