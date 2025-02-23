@@ -1,5 +1,6 @@
 include <../OpenSCAD_Lib/MakeInclude.scad>
 include <../OpenSCAD_Lib/chamferedCylinders.scad>
+include <../OpenSCAD_Lib/torus.scad>
 
 funnelToBaseDia = 40;
 
@@ -37,6 +38,10 @@ module itemModule()
 
         // Opening between funnel and container:
 		tcy([0,0,10], d=funnelToBaseDia, h=100);
+
+        // Torus between funnel and base:
+        torusRadius = 45;
+        translate([0,0,61]) torus2a(radius=torusRadius, translation=containerOD/2 + torusRadius - 14);
 	}
 }
 
