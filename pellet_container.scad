@@ -17,7 +17,11 @@ module itemModule()
 	difference()
 	{
         // Exterior:
-        translate([0,0,containerZ]) mirror([0,0,1]) simpleChamferedCylinder(d=containerOD, h=containerZ, cz=2);
+        union()
+        {
+            translate([0,0,containerZ/2]) mirror([0,0,1]) simpleChamferedCylinder(d=containerOD, h=containerZ/2, cz=2);
+            translate([0,0,containerZ/2]) simpleChamferedCylinder(d=containerOD, h=containerZ/2, cz=1);
+        }
 
         // Base interior:
 		translate([0,0,baseFloorZ]) 
@@ -27,8 +31,9 @@ module itemModule()
         }
 
         // Funnel:
-        translate([0,0,containerZ-baseID/2]) cylinder(d1=0, d2=baseID, h=baseID/2);
-        tcy([0,0,containerZ-nothing], d=baseID, h=10);
+        funnelOpeningDia = baseID - 1;
+        translate([0,0,containerZ-funnelOpeningDia/2]) cylinder(d1=0, d2=funnelOpeningDia, h=funnelOpeningDia/2);
+        tcy([0,0,containerZ-nothing], d=funnelOpeningDia, h=10);
 
         // Opening between funnel and container:
 		tcy([0,0,10], d=funnelToBaseDia, h=100);
