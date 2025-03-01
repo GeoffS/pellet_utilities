@@ -2,6 +2,9 @@ include <../OpenSCAD_Lib/MakeInclude.scad>
 include <../OpenSCAD_Lib/chamferedCylinders.scad>
 include <../OpenSCAD_Lib/torus.scad>
 
+makeCylindrical = false;
+makeWaisted = false;
+
 funnelToBaseDia = 40;
 
 containerOD = 120;
@@ -12,7 +15,7 @@ baseFloorZ = 2;
 baseID = containerOD - 2*containerWallThickness;
 baseCylinderZ = 20;
 
-module itemModule()
+module itemModule(removeWaist)
 {
 	// Base:
 	difference()
@@ -41,7 +44,7 @@ module itemModule()
 
         // Torus between funnel and base:
         torusRadius = 45;
-        translate([0,0,61]) torus2a(radius=torusRadius, translation=containerOD/2 + torusRadius - 14);
+        if(removeWaist) translate([0,0,61]) torus2a(radius=torusRadius, translation=containerOD/2 + torusRadius - 14);
 	}
 }
 
@@ -52,9 +55,10 @@ module clip(d=0)
 
 if(developmentRender)
 {
-	display() itemModule();
+	display() itemModule(false);
 }
 else
 {
-	itemModule();
+	if(makeCylindrical) itemModule(removeWaist=false);
+    if(makeWaisted) itemModule(removeWaist=true);
 }
